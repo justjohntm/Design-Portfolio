@@ -294,5 +294,9 @@ h2 { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.2; }
 h3 { font-size: 1.25rem; line-height: 1.3; }
 p  { font-size: 1rem; line-height: 1.7; max-width: 65ch; }
 
-img { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
-img.in-view { opacity: 1; transform: none; }
+.fade-in { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
+.fade-in.in-view { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { opacity: 1; transform: none; transition: none; }
+}

@@ -103,10 +103,12 @@
 </div>
 
 <script>
-document.querySelectorAll('img').forEach(img => {
-  new IntersectionObserver(([e]) => e.isIntersecting && e.target.classList.add('in-view'),
-    { threshold: 0.2 }
-  ).observe(img);
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('img.fade-in').forEach(img => {
+    new IntersectionObserver(([e]) => e.isIntersecting && e.target.classList.add('in-view'),
+      { threshold: 0.2 }
+    ).observe(img);
+  });
 });
 </script>
 
