@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bike comparison tool — John Campbell</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="logo"><a href="index.html">John Campbell</a></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="cv/JOHN-CV.pdf">CV</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="case-header">
+    <div>
+      <h1>Bike comparison tool</h1>
+      <p class="tagline">Designing a bike comparison tool suitable for a range of brand styles.</p>
+    </div>
+    <div>
+      <p class="role-label">My role:</p>
+      <p>Design lead, UX Research, UX Design, UI Design</p>
+      <p style="margin-top:20px;"><strong>Team:</strong><br>Chris Constandse &amp; FE Developer</p>
+    </div>
+  </div>
+
+  <div class="case-body">
+    <h2>Overview</h2>
+    <p>The ability to compare products that are similar helps shoppers make educated decisions on their purchases. When a user is looking at bicycles online and can't decide between models they want to be able to compare models so they can know make a more informed buying decision.</p>
+
+    <img src="images/bike-comparison-tool/Screenshot_2022-01-18_at_16_01_46.png" alt="Bike comparison tool overview">
+
+    <h2>Research</h2>
+    <p><strong>Methods:</strong><br>
+    Cross industry competitive analysis, Analytics, Card sorting, User testing, Contextual review of academic research.</p>
+
+    <h3>Key Insights</h3>
+    <ul>
+      <li>Don't allow for too many items for comparison</li>
+      <li>Information consistency is key when comparing.</li>
+      <li>Give users control over what is important to them.</li>
+      <li>Simplify the experience for mobile.</li>
+    </ul>
+
+    <img src="images/bike-comparison-tool/unsplash-image-m2TU2gfqSeE.jpg" alt="Research session">
+
+    <h2>Prototyping solutions</h2>
+    <p>Due to the nature of our scalable design system once we had completed our research and knew the problems we had to address we knew we already had most of the components we needed. This means we reduce complexity and reuse what we have already by not creating anything custom unless it is required. We only needed to create one new component which was the pull up in which the products which were being compared would live.</p>
+
+    <img src="images/bike-comparison-tool/UPullup.png" alt="Comparison pull up component">
+
+    <h2>Process</h2>
+    <p>The biggest challenge we faced was with making the comparison function and display in the most user friendly way on mobile. After we had put together our initial prototypes and after multiple iterations we were ready to test. We were going to launch the feature with Raleigh, one of our core brands from the UK. After testing with our stakeholders at Raleigh we were ready to make some minor changes and launch the feature.</p>
+
+    <img src="images/bike-comparison-tool/Compare.png" alt="Bike comparison tool in context">
+
+    <h2>Solution</h2>
+    <p>By addressing each of the needs identified in our research process we delivered a comprehensive comparison tool for our users.</p>
+
+    <h3>1. Don't allow for too many items in comparison.</h3>
+    <p>What we found in our research is that having too many bikes for comparison could be cognitively overloading. I think we all know the feeling that too much choice can often be a difficult thing when it comes to making a purchase. For this reason we choose to limit the number of bikes in the comparison to 3 initially pending further user testing and research. When the user puts in their first bike the pull up opens with a message informing them they can compare a maximum of 3 bikes.</p>
+
+    <img src="images/bike-comparison-tool/3items.gif" alt="Maximum 3 items comparison demo">
+
+    <h3>2. Information consistency is key when comparing</h3>
+    <p>One of the most key elements of a successful comparison is clear and accurate information consistency. Making sure products have the same taxonomy in regards to specifications is vital. On launching the feature we communicated to our brands to make sure there was no missing specification information as during our research we discovered that having blank spots or inconsistencies can actually be detrimental to the experience.</p>
+
+    <img src="images/bike-comparison-tool/Screenshot_2022-01-19_at_11_43_14.png" alt="Information consistency in comparison">
+
+    <h3>3. Give users control over what is important to them</h3>
+    <p>Bike specifications can be quite complicated and more than anything quite vast. It was important that we offered our users an ability to only see the information relevant to them. For this reason when showing the specification in comparison we used accordions. This means that if someone is only looking to compare battery capacity on electric bikes they can close other irrelevant accordions. Thus delivering some empowerment to the user so they control what they compare.</p>
+
+    <img src="images/bike-comparison-tool/importance.gif" alt="Accordion control demo">
+
+    <h3>4. Simplify the experience of mobile</h3>
+    <p>As most of Raleighs users are viewing mobile devices it was imperative that we made the mobile comparison as user friendly as possible. During our research in comparison of other comparison tools we often found this was their major downside. So with this crux in mind we spent extensive time in the execution making sure to deliver a more scalable solution no matter the screen size. No matter where the user is in the comparison they can still see what spec belongs to which bike in their comparison.</p>
+
+    <img src="images/bike-comparison-tool/mobileexp.gif" alt="Mobile experience demo">
+
+    <h2>Measuring Success</h2>
+    <h3>Happy Stakeholders</h3>
+    <p>When we successfully launched the tool with Raleigh our stakeholders were extremely pleased with this feature delivery that was of extreme importance. This lead to the other brands on our platform asking for it to be implemented. This is where I find a bit of magic in this scalable set up we have.</p>
+
+    <h3>Analytics</h3>
+    <p>We have implemented tracking on the comparison tool and are hoping to see our results across several dimensions soon.</p>
+
+    <h3>Independent review by research agency</h3>
+    <p>Perhaps the most satisfying reward so far has been a report delivered by Raleighs independent research agency Clicky. This was their summary:</p>
+
+    <img src="images/bike-comparison-tool/Screenshot_2022-01-21_at_15_03_41.png" alt="Clicky research agency report summary">
+
+    <h2>Take aways</h2>
+    <ul>
+      <li>Design systems have high business impact for more than just designers. The flexibility of our system played a huge role in giving us freedom to explore the problem longer and then being able to implement the design fast.</li>
+      <li>Comparing on mobile is hard, but not impossible. Our research into other comparison tools across industries showed clearly that the mobile experience was lacking for users across the board. We took this into the heart of our approach making sure to deliver as smooth an experience as possible.</li>
+      <li>Involve people all along development journey. By taking more initiative to get people more involved with the design and development it led to additional insights that informed the design process.</li>
+      <li>Many opportunities for further development. As this was the first iteration of the comparison tool I look forward with excitement as we seek to improve it.</li>
+    </ul>
+
+    <p>Try out the comparison tool for yourself and let me know what you think!</p>
+  </div>
+
+  <footer class="contact">
+    <p>Get in touch with me via one of the links here.</p>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/johnjamescampbell/" target="_blank" rel="noopener">Linkedin.</a>
+      <a href="mailto:jjcjabell@gmail.com">Email.</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

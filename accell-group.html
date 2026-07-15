@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accell Group — John Campbell</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="logo"><a href="index.html">John Campbell</a></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="cv/JOHN-CV.pdf">CV</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="case-header">
+    <div>
+      <h1>Accell Group</h1>
+      <p class="tagline">Creating a scalable international design system for a headless e-commerce platform.</p>
+    </div>
+    <div>
+      <p class="role-label">My role:</p>
+      <p>UX Design, UX Research, UI Design,</p>
+    </div>
+  </div>
+
+  <div class="case-body">
+    <p>Accell is one of the biggest bike distributors in Europe. The Dutch company has 20 brands in total, 8 of these brands that make up our offering being &ldquo;strategic brands&rdquo;. Accell has traditionally been a very B2B driven company but a few years ago really saw the value in B2C and with 2020 we seen the importance of growing this channel was further underlined. The digital team was formed to help fully realise the benefit of the D2C market.</p>
+
+    <h2>Our teams mission 🎯</h2>
+    <p>To build a scalable e-commerce platform and gradually migrate our brands across to our new digital ecosystem. Our brands were hosted on outdated/outsourced platforms so with our mission we seek to benefit from the economies of scale.</p>
+
+    <h2>Why 🤷</h2>
+    <p>To empower our users to have a better omnichannel experience for buying our bikes. We needed to have the technology that could serve content from our websites all the way to bike apps, thus providing a more rounded omnichannel experience for our brands customers.</p>
+
+    <h2>Scalable design systems</h2>
+    <p>So one of our labours of love in this process as designers was the creation and maintenance of a scalable design system.</p>
+    <p>So why was that important?</p>
+
+    <h3>What is a scalable design system?</h3>
+    <p>A systematic approach to design. It is a definition of elements such as typography, colours, UI components, codes and guidelines that we use repeatedly and consistently to build our websites and products in across channels.</p>
+    <p>Our design system helps to bring order and consistency to our digital products. They help to protect our brands, improve user experience and increase time to market and efficiency of how we design and build products. It holds us to high standards, keep teams on the same page, and helps to onboard new team members.</p>
+
+    <p><strong>Tools/Frameworks we manage our design system with:</strong><br>
+    Figma (Initially Sketch but migrating to Figma), Storybook, Zeroheight, OOUX, Design tokens.</p>
+
+    <p><strong>Who our design system is for:</strong><br>
+    Visual designers, UX designers, Developers, Marketeers, Content editors, Creative agencies etc.</p>
+
+    <img src="images/accell-group/Screenshot_2022-01-20_at_11_46_13.png" alt="Design system overview">
+
+    <p>With every brand needing more customisable design features and specific elements it can be quite difficult to maintain the scalability in the international sense. So to protect the scalability of our design system we adopted an important concept while building our set up called OOUX (Object Oriented UX).</p>
+
+    <h3>So what is OOUX?</h3>
+    <p>Object Oriented UX offers a better way to break up complexity, allowing us to work iteratively and holistically. Instead of slicing up a system by verbs, OOUXers slice by nouns.</p>
+    <p>Objects first. Mobile first. Content first.</p>
+    <p>I've included a talk by the pioneer of the approach Sophia V Prater, where she explains the concept in excellent detail.</p>
+
+    <div class="media">
+      <iframe width="100%" height="450" src="https://www.youtube.com/embed/1ENrrTuN-jI" title="Object-Oriented UX (OOUX) with Sophia Prater" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+
+    <p>Some extra reading if you are keen on the concept:<br>
+    <a href="https://alistapart.com/article/object-oriented-ux/" target="_blank" rel="noopener">alistapart.com/article/object-oriented-ux</a><br>
+    <a href="http://alistapart.com/article/ooux-a-foundation-for-interaction-design/" target="_blank" rel="noopener">alistapart.com/article/ooux-a-foundation-for-interaction-design</a></p>
+
+    <img src="images/accell-group/1ec4b99a-c5ca-4a87-a19e-ef6ba3ca40d3.png" alt="OOUX concept diagram">
+
+    <h2>Design Tokens</h2>
+    <p>The final tool in our scalable design system are our Design tokens. They are the visual design atoms of our design system — specifically, they are named entities that store visual design attributes. We use them in place of hard-coded values in order to maintain a scalable and consistent visual system for the UI development of our platform.</p>
+    <p>So what are design tokens? Design tokens are all the values needed to construct and maintain a design system — spacing, colour, typography, object styles, animation, etc. — represented as data. They're used in place of hard-coded values in order to ensure flexibility and unity across all screen sizes. Our tokens cover various options for brands including dark themes, component states, and much more.</p>
+
+    <h3>&ldquo;What can I do?&rdquo;</h3>
+    <p>Our design system offers options. Options are visual identity properties. In the example you can see how colours for a brand are built up.</p>
+    <img src="images/accell-group/Options.png" alt="Design token options example">
+
+    <h3>&ldquo;What choice do I make?&rdquo;</h3>
+    <p>Our design system submits decisions. Decisions are options applied to contexts. In the example you can see where we make the decision to call on the blueGradient option to a background.</p>
+    <img src="images/accell-group/Decisions.png" alt="Design token decisions example">
+
+    <p>The result of these two means that our &ldquo;stylesheet&rdquo; is produced in code by a collection of decisions; this can be seen in the example above. Here options and decisions aren't buried in Sass files. Instead, they are centralised and propagated as tokens for any designer or developer adopting the system in an easy-to-use predictable format.</p>
+    <img src="images/accell-group/Stylesheet.png" alt="Generated stylesheet from design tokens">
+    <p>So in summary our design tokens are a human-readable, abstraction of visual styles, that sync with all the style files in the system.</p>
+
+    <h2>Work so far</h2>
+    <p>We have now successfully migrated 3 of our strategic brands and are well on course for our next big launch. Feel free to check them out:</p>
+    <ul>
+      <li>Raleigh</li>
+      <li>Lapierre</li>
+      <li>Sparta</li>
+    </ul>
+
+    <p>What I've shared is only a small part of the story so If you'd like to know more about my work at Accell please feel free to get in touch with me I'd love to tell you the full story.</p>
+  </div>
+
+  <footer class="contact">
+    <p>Get in touch with me via one of the links here.</p>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/johnjamescampbell/" target="_blank" rel="noopener">Linkedin.</a>
+      <a href="mailto:jjcjabell@gmail.com">Email.</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

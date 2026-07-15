@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Saving & Investing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-primary: #002D3A;
+            --brand-accent: #E31D2B;
+            --brand-bg-tint: #FCEEF0;
+            --bg-offwhite: #FAFAFA;
+            --white: #FFFFFF;
+            --black: #0F172A;
+            --text-grey: #64748B;
+            --border-light: #E2E8F0;
+            --success-green: #00B67A;
+            --trustpilot-green: #00B67A;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); color: var(--black); line-height: 1.6; overflow-x: hidden; background: var(--white); -webkit-font-smoothing: antialiased; }
+        h1, h2, h3 { font-family: var(--font-heading); color: var(--brand-primary); }
+        .container { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+        /* ─── HERO ─── */
+        .hero { text-align: center; padding: 80px 24px 60px; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -30px; left: -40px; width: 220px; height: 200px; background: var(--brand-accent); border-radius: 0 0 60% 0; opacity: 0.92; clip-path: ellipse(65% 70% at 20% 20%); z-index: 0; }
+        .hero::after { content: ''; position: absolute; top: -10px; right: -20px; width: 140px; height: 140px; background: var(--brand-primary); border-radius: 0 0 0 60%; opacity: 0.9; clip-path: ellipse(70% 70% at 80% 20%); z-index: 0; }
+        .hero-inner { position: relative; z-index: 1; }
+        .hero h1 { font-size: clamp(2.4rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; color: var(--brand-primary); }
+        .hero p { font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--black); max-width: 440px; margin: 0 auto 32px; font-weight: 400; opacity: 0.85; }
+        
+        .down-arrow-btn { width: 44px; height: 44px; background: var(--brand-primary); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 40px; cursor: pointer; transition: transform 0.3s ease; color: white; text-decoration: none; border: none; }
+        .down-arrow-btn:hover { transform: translateY(5px); }
+        .down-arrow-btn svg { width: 18px; height: 18px; }
+
+        .app-badges { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .app-badge { display: flex; align-items: center; gap: 8px; border: 1.5px solid #C8D4D8; border-radius: 8px; padding: 7px 16px; background: white; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; text-decoration: none; color: var(--brand-primary); }
+        .app-badge:hover { border-color: var(--brand-primary); box-shadow: 0 4px 12px rgba(0,45,58,0.1); }
+        .app-badge-icon { font-size: 1.6rem; line-height: 1; }
+        .app-badge-text { display: flex; flex-direction: column; text-align: left; }
+        .app-badge-text small { font-size: 0.65rem; color: var(--text-grey); text-transform: uppercase; letter-spacing: 0.04em; }
+        .app-badge-text strong { font-size: 0.85rem; font-weight: 700; color: var(--brand-primary); }
+
+        .hero-trustpilot { position: absolute; top: 24px; right: 24px; z-index: 2; display: flex; align-items: center; gap: 4px; }
+        .tp-star { width: 22px; height: 22px; background: var(--trustpilot-green); display: inline-flex; align-items: center; justify-content: center; border-radius: 2px; }
+        .tp-star svg { width: 14px; height: 14px; fill: white; }
+
+        /* ─── PRODUCTS CAROUSEL ─── */
+        .products-section { background: var(--brand-bg-tint); padding: 64px 0 56px; text-align: center; }
+        .products-section h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin-bottom: 24px; color: var(--brand-primary); }
+
+        .filters { display: inline-flex; background: white; border-radius: 30px; padding: 5px; gap: 4px; margin-bottom: 48px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .filter-btn { border: none; background: transparent; padding: 7px 18px; border-radius: 20px; font-size: 0.88rem; font-weight: 500; color: var(--text-grey); cursor: pointer; transition: all 0.2s; font-family: var(--font-body); }
+        .filter-btn.active { background: var(--brand-primary); color: white; }
+        .filter-btn:hover:not(.active) { background: var(--border-light); color: var(--brand-primary); }
+
+        /* REWORKED CAROUSEL LAYOUT */
+        .carousel-wrap { position: relative; display: flex; align-items: center; justify-content: center; max-width: 100%; margin: 0 auto; overflow: hidden; }
+        
+        .carousel {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* Firefox */
+            padding: 40px calc(50% - 65px); /* Forces items into the exact center */
+            scroll-snap-type: x mandatory;
+            align-items: center;
+            width: 100%;
+        }
+        .carousel::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
+
+        .product-item {
+            display: flex; flex-direction: column; align-items: center;
+            text-align: center; cursor: pointer; 
+            flex-shrink: 0;
+            width: 130px; 
+            scroll-snap-align: center; /* Snaps to center of container */
+            transition: all 0.3s ease;
+        }
+        
+        .product-circle {
+            width: 100px; height: 100px;
+            background: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            margin-bottom: 14px;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+        
+        /* The Center Focus State */
+        .product-item.active .product-circle {
+            width: 140px; height: 140px;
+            border: 2px dashed #BBCDD4;
+            box-shadow: 0 0 0 10px rgba(255,255,255,0.8), 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .sw-bird { width: 40px; height: 40px; transition: all 0.35s ease;}
+        .product-item.active .sw-bird { width: 54px; height: 54px; }
+
+        .product-label {
+            font-size: 0.85rem; font-weight: 600; color: var(--brand-primary);
+            max-width: 120px; line-height: 1.3; transition: all 0.3s ease;
+            opacity: 0.5; /* Dim non-active items */
+        }
+        .product-item.active .product-label { opacity: 1; }
+
+        /* Nav Buttons */
+        .nav-btn {
+            position: absolute; z-index: 10;
+            width: 48px; height: 48px;
+            background: white; border: 1px solid var(--border-light);
+            border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.06); color: var(--brand-primary);
+        }
+        .nav-btn:hover { background: var(--brand-primary); color: white; border-color: var(--brand-primary); }
+        .nav-btn svg { width: 18px; height: 18px; }
+        
+        /* Positioned slightly inside the wrapper so they don't break wide screens */
+        #btnLeft { left: max(20px, calc(50% - 500px)); }
+        #btnRight { right: max(20px, calc(50% - 500px)); }
+
+        .carousel-cta-text { margin-top: 28px; font-size: 0.92rem; color: var(--text-grey); margin-bottom: 16px; }
+        .btn-dark {
+            background: var(--brand-primary); color: white; border: none; padding: 13px 28px;
+            border-radius: 30px; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: all 0.2s;
+            display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body);
+        }
+        .btn-dark:hover { background: #003D4F; transform: translateX(2px); }
+
+        .carousel-dots { display: flex; justify-content: center; gap: 6px; margin-top: 24px; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-light); cursor: pointer; transition: all 0.2s; }
+        .dot.active { background: var(--brand-primary); width: 22px; border-radius: 4px; }
+
+        /* ─── WHY CHOOSE ─── */
+        .why-section { padding: 80px 0; background: white; position: relative; overflow: hidden; }
+        .why-section::after { content: ''; position: absolute; top: 0; right: 0; width: 180px; height: 180px; background: var(--brand-primary); clip-path: polygon(100% 0, 0 0, 100% 100%); z-index: 0; }
+        .why-corner-red { position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: var(--brand-accent); clip-path: polygon(100% 0, 0 0, 100% 100%); z-index: 1; }
+        .why-section .container { position: relative; z-index: 2; }
+        .why-section h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 64px; max-width: 420px; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px 32px; }
+        @media (min-width: 768px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } .stat-item { border-left: 1px solid var(--border-light); padding-left: 28px; } .stat-item:first-child { border-left: none; padding-left: 0; } }
+        .stat-number { font-family: var(--font-heading); font-size: clamp(2.4rem, 5vw, 3.8rem); color: var(--brand-primary); line-height: 1; margin-bottom: 8px; font-weight: 700; }
+        .stat-unit { font-size: 1.2rem; font-weight: 600; font-family: var(--font-body); }
+        .stat-desc { font-size: 0.88rem; color: var(--text-grey); line-height: 1.4; max-width: 160px; }
+
+        /* ─── GET HELP ─── */
+        .help-section { padding: 80px 0; background: var(--bg-offwhite); }
+        .help-section h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin-bottom: 10px; }
+        .help-subtitle { font-size: 0.95rem; color: var(--text-grey); margin-bottom: 48px; max-width: 520px; }
+        .help-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 768px) { .help-grid { grid-template-columns: repeat(3, 1fr); } }
+        .help-card { background: white; border-radius: 20px; padding: 32px 28px 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
+        .help-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.10); }
+        .help-card-img { height: 120px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 4rem; }
+        .help-card h4 { font-family: var(--font-body); font-size: 1rem; font-weight: 700; color: var(--brand-primary); margin-bottom: 8px; }
+        .help-card p { font-size: 0.88rem; color: var(--text-grey); line-height: 1.5; }
+
+        /* ─── SOCIAL PROOF ─── */
+        .social-section { padding: 80px 0; text-align: center; background: white; }
+        .social-section h2 { font-size: clamp(1.8rem, 3.5vw, 2.2rem); margin-bottom: 40px; }
+        .trustpilot-widget { display: inline-flex; flex-direction: column; align-items: center; padding: 28px 48px; background: var(--bg-offwhite); border-radius: 16px; border: 1px solid var(--border-light); }
+        .tp-excellent { font-size: 1.4rem; font-weight: 700; color: var(--brand-primary); margin-bottom: 10px; }
+        .tp-stars { display: flex; gap: 4px; margin-bottom: 10px; }
+        .tp-star-lg { width: 36px; height: 36px; background: var(--trustpilot-green); display: flex; align-items: center; justify-content: center; border-radius: 3px; }
+        .tp-star-lg svg { width: 22px; height: 22px; fill: white; }
+        .tp-reviews { font-size: 0.88rem; color: var(--text-grey); margin-bottom: 12px; }
+        .tp-logo { display: flex; align-items: center; gap: 6px; font-size: 0.95rem; font-weight: 700; color: var(--brand-primary); }
+        .tp-logo-star { color: var(--trustpilot-green); font-size: 1.1rem; }
+
+        /* ─── APP PROMO ─── */
+        .app-promo { background: var(--brand-accent); padding: 80px 0 0; position: relative; overflow: hidden; }
+        .app-promo-inner { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        @media (min-width: 768px) { .app-promo-inner { flex-direction: row; align-items: flex-end; justify-content: space-between; text-align: left; } }
+        .app-promo-text { color: white; padding-bottom: 48px; max-width: 380px; }
+        @media (min-width: 768px) { .app-promo-text { padding-bottom: 80px; } }
+        .app-promo-text h2 { font-size: clamp(2.4rem, 5vw, 4rem); color: white; line-height: 1.05; margin-bottom: 16px; }
+        .app-promo-text p { font-size: 0.95rem; opacity: 0.9; margin-bottom: 32px; line-height: 1.6; }
+        .btn-white { background: white; color: var(--brand-accent); border: none; padding: 12px 28px; border-radius: 30px; font-size: 0.95rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s, box-shadow 0.2s; font-family: var(--font-body); }
+        .btn-white:hover { transform: translateX(4px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .phone-wrap { display: flex; justify-content: center; align-items: flex-end; margin-top: 40px; }
+        @media (min-width: 768px) { .phone-wrap { margin-top: 0; } }
+        .phone { background: white; width: 280px; border-radius: 32px 32px 0 0; padding: 22px 18px 0; box-shadow: 0 -20px 60px rgba(0,0,0,0.2), 0 0 0 8px rgba(255,255,255,0.15); overflow: hidden; }
+        .phone-header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .phone-icon { color: var(--text-grey); font-size: 1rem; }
+        .phone-logo-icon { width: 28px; height: 28px; background: var(--brand-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .phone-logo-icon svg { width: 16px; height: 16px; fill: white; }
+        .phone-balance-label { text-align: center; font-size: 0.72rem; color: var(--text-grey); margin-bottom: 4px; }
+        .phone-balance-amount { text-align: center; font-size: 2rem; font-weight: 700; color: var(--brand-primary); letter-spacing: -0.03em; margin-bottom: 8px; }
+        .phone-actions-row { display: flex; justify-content: center; gap: 8px; margin-bottom: 24px; }
+        .phone-action-pill { display: flex; align-items: center; gap: 4px; background: var(--bg-offwhite); border-radius: 20px; padding: 4px 12px; font-size: 0.72rem; font-weight: 600; color: var(--brand-accent); }
+        .phone-action-dot { width: 8px; height: 8px; background: var(--brand-accent); border-radius: 50%; }
+        .phone-section-label { font-size: 0.8rem; font-weight: 700; color: var(--brand-primary); margin-bottom: 10px; }
+        .phone-account-card { background: var(--bg-offwhite); border-radius: 12px; padding: 14px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .phone-account-left { display: flex; gap: 10px; align-items: center; }
+        .phone-account-icon { width: 30px; height: 30px; background: var(--brand-bg-tint); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+        .phone-account-name { font-size: 0.78rem; font-weight: 600; color: var(--brand-primary); }
+        .phone-account-num { font-size: 0.68rem; color: var(--text-grey); }
+        .phone-account-val { font-size: 0.88rem; font-weight: 700; color: var(--brand-primary); text-align: right; }
+        .phone-account-arrow { color: var(--brand-accent); font-size: 0.8rem; margin-left: 8px; }
+        .phone-no-fees { text-align: center; padding: 12px; font-size: 0.72rem; color: var(--text-grey); border-top: 1px solid var(--border-light); margin-top: 4px; }
+        .phone-no-fees strong { color: var(--brand-primary); }
+
+        /* ─── ANIMATIONS ─── */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        .animate { opacity: 0; }
+        .animate.visible { animation: fadeInUp 0.6s ease forwards; }
+        .animate-delay-1 { animation-delay: 0.1s; }
+        .animate-delay-2 { animation-delay: 0.2s; }
+        .animate-delay-3 { animation-delay: 0.3s; }
+        .animate-delay-4 { animation-delay: 0.4s; }
+
+        @media (max-width: 640px) {
+            .hero { padding: 60px 20px 48px; }
+            .hero-trustpilot { display: none; }
+            .nav-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <div class="hero-trustpilot" aria-label="Trustpilot rating">
+        <div class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+    </div>
+
+    <div class="hero-inner animate">
+        <h1>Start saving<br>and investing</h1>
+        <p>Save for rainy days, invest for life's big moments,<br>and protect the things you love.</p>
+        <a href="#products" class="down-arrow-btn" aria-label="Scroll down">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="app-badges">
+            <a href="#" class="app-badge" aria-label="Download on App Store">
+                <span class="app-badge-icon">🍎</span>
+                <span class="app-badge-text">
+                    <small>Download on the</small>
+                    <strong>App Store</strong>
+                </span>
+            </a>
+            <a href="#" class="app-badge" aria-label="Get it on Google Play">
+                <span class="app-badge-icon">▶</span>
+                <span class="app-badge-text">
+                    <small>Get it on</small>
+                    <strong>Google Play</strong>
+                </span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="products-section" id="products">
+    <div class="container">
+        <h2 class="animate">Our products</h2>
+
+        <div class="filters animate animate-delay-1">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="pensions">Pensions</button>
+            <button class="filter-btn" data-filter="investments">Investments</button>
+            <button class="filter-btn" data-filter="insurance">Insurance</button>
+        </div>
+
+        <div class="carousel-wrap animate animate-delay-2">
+            <button class="nav-btn" id="btnLeft" aria-label="Previous product">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+
+            <div class="carousel" id="productCarousel">
+                </div>
+
+            <button class="nav-btn" id="btnRight" aria-label="Next product">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+
+        <p class="carousel-cta-text animate animate-delay-3">Want to invest but don't know where to start?<br>Let us manage your investments for you.</p>
+        <button class="btn-dark animate animate-delay-3">Learn more →</button>
+
+        <div class="carousel-dots animate animate-delay-3">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+</section>
+
+<section class="why-section" id="why">
+    <div class="why-corner-red"></div>
+    <div class="container">
+        <h2 class="animate">Why choose Scottish Widows?</h2>
+        <div class="stats-grid">
+            <div class="stat-item animate animate-delay-1">
+                <div class="stat-number">10 <span class="stat-unit">million</span></div>
+                <p class="stat-desc">customers who trust us with their futures</p>
+            </div>
+            <div class="stat-item animate animate-delay-2">
+                <div class="stat-number">200+</div>
+                <p class="stat-desc">years helping people save and invest</p>
+            </div>
+            <div class="stat-item animate animate-delay-3">
+                <div class="stat-number">30+</div>
+                <p class="stat-desc">awards and five star ratings for our products</p>
+            </div>
+            <div class="stat-item animate animate-delay-4">
+                <div class="stat-number">0</div>
+                <p class="stat-desc">hidden fees or unexpected charges</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="help-section" id="help">
+    <div class="container">
+        <h2 class="animate">Get help to choose</h2>
+        <p class="help-subtitle animate animate-delay-1">Compare our products, get financial advice, or explore your options with Invest AI.</p>
+
+        <div class="help-grid">
+            <div class="help-card animate animate-delay-1">
+                <div class="help-card-img">
+                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                        <circle cx="50" cy="55" r="30" fill="#FCEEF0"/><circle cx="50" cy="55" r="22" fill="white" stroke="#E2E8F0" stroke-width="1"/><circle cx="50" cy="55" r="14" fill="#FCEEF0"/><circle cx="50" cy="55" r="7" fill="#E31D2B"/><line x1="20" y1="25" x2="50" y2="55" stroke="#002D3A" stroke-width="2.5" stroke-linecap="round"/><line x1="15" y1="35" x2="50" y2="55" stroke="#002D3A" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="18" x2="50" y2="55" stroke="#E31D2B" stroke-width="2.5" stroke-linecap="round"/><circle cx="50" cy="55" r="3" fill="white"/><ellipse cx="50" cy="87" rx="18" ry="4" fill="#E2E8F0"/><rect x="48" y="78" width="4" height="9" rx="1" fill="#002D3A"/><rect x="38" y="84" width="24" height="3" rx="1.5" fill="#002D3A"/>
+                    </svg>
+                </div>
+                <h4>Compare products</h4>
+                <p>Explore and compare our pensions, investments and insurance products.</p>
+            </div>
+
+            <div class="help-card animate animate-delay-2">
+                <div class="help-card-img">
+                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                        <path d="M30 70 Q20 45 40 30 Q55 18 65 30 Q75 42 60 55 Q50 63 55 75" stroke="#E31D2B" stroke-width="8" stroke-linecap="round" fill="none"/><path d="M55 75 Q65 80 70 65 Q72 55 60 55" stroke="#002D3A" stroke-width="6" stroke-linecap="round" fill="none"/><circle cx="30" cy="70" r="6" fill="#E31D2B"/>
+                    </svg>
+                </div>
+                <h4>Invest AI</h4>
+                <p>Coming soon to our app, explore your options with an AI investing assistant.</p>
+            </div>
+
+            <div class="help-card animate animate-delay-3">
+                <div class="help-card-img">
+                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                        <path d="M35 75 Q32 65 34 58 Q28 52 26 44 Q24 36 30 30 Q36 26 44 28 Q50 24 54 26 Q62 22 66 30 Q70 32 68 40 Q72 46 70 54 Q68 60 62 62 L64 75" stroke="#002D3A" stroke-width="3" fill="#002D3A" stroke-linejoin="round"/><path d="M35 75 L38 75 Q40 65 42 60 Q50 62 58 60 L62 75 L65 75" fill="#002D3A"/><path d="M44 28 Q46 20 50 18 Q54 16 56 22 Q52 24 50 26" fill="#002D3A"/><path d="M64 54 Q72 50 76 42 Q80 36 76 32" stroke="#002D3A" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="50" cy="78" rx="22" ry="3" fill="#E2E8F0"/>
+                    </svg>
+                </div>
+                <h4>Financial advice</h4>
+                <p>Get financial advice and help to make decisions from an independent financial advisor at Lloyds Wealth.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="social-section">
+    <div class="container">
+        <h2 class="animate">Don't take our word for it</h2>
+        <div class="trustpilot-widget animate animate-delay-1">
+            <div class="tp-excellent">Excellent</div>
+            <div class="tp-stars">
+                <div class="tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <div class="tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+            </div>
+            <div class="tp-reviews">Based on <strong>3,332 reviews</strong></div>
+            <div class="tp-logo"><span class="tp-logo-star">★</span> Trustpilot</div>
+        </div>
+    </div>
+</section>
+
+<section class="app-promo">
+    <div class="container app-promo-inner">
+        <div class="app-promo-text">
+            <h2>Build<br>with us</h2>
+            <p>It's easier to plan your future when everything is in one place.</p>
+            <button class="btn-white">Explore the app →</button>
+        </div>
+
+        <div class="phone-wrap">
+            <div class="phone">
+                <div class="phone-header-bar">
+                    <span class="phone-icon">☰</span>
+                    <div class="phone-logo-icon"><svg viewBox="0 0 60 60" fill="none"><path d="M15 40 Q25 18 38 28 Q44 33 37 40 Q29 47 18 42Z" fill="white"/><path d="M34 25 Q42 14 48 20 Q46 30 37 28Z" fill="rgba(255,255,255,0.6)"/></svg></div>
+                    <span class="phone-icon">✉</span>
+                </div>
+                <div class="phone-balance-label">Total value</div>
+                <div class="phone-balance-amount">£54,240.00</div>
+                <div class="phone-actions-row"><div class="phone-action-pill"><div class="phone-action-dot"></div>Actions</div></div>
+                <div class="phone-section-label">Accounts</div>
+                <div class="phone-account-card">
+                    <div class="phone-account-left">
+                        <div class="phone-account-icon">🐦</div>
+                        <div><div class="phone-account-name">My pension</div><div class="phone-account-num">ZU28900</div></div>
+                    </div>
+                    <div style="display:flex;align-items:center;">
+                        <div><div class="phone-account-val">£54,240.00</div><div style="font-size:0.65rem;color:var(--text-grey);text-align:right;">Value on 24 Mar 2025 →</div></div>
+                        <span class="phone-account-arrow">›</span>
+                    </div>
+                </div>
+                <div class="phone-no-fees">No account fees? <strong>Yes please.</strong> 🐦</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // ── Scroll-triggered animations ──
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(el => {
+            if (el.isIntersecting) el.target.classList.add('visible');
+        });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+    // ── INFINITE CAROUSEL LOGIC ──
+    const carousel = document.getElementById('productCarousel');
+    const dots = document.querySelectorAll('.dot');
+    
+    // Original Product Data
+    const products = [
+        { label: 'Stocks & Shares ISA', icon: '<ellipse cx="30" cy="30" rx="22" ry="22" fill="#FCEEF0"/><path d="M20 35 Q28 20 38 28 Q42 32 36 36 Q30 40 22 37Z" fill="#E31D2B"/><path d="M34 26 Q40 18 44 22 Q42 28 36 28Z" fill="#002D3A"/>' },
+        { label: 'Share Dealing Account', icon: '<ellipse cx="30" cy="30" rx="22" ry="22" fill="#FCEEF0"/><path d="M20 35 Q28 20 38 28 Q42 32 36 36 Q30 40 22 37Z" fill="#E31D2B"/><path d="M34 26 Q40 18 44 22 Q42 28 36 28Z" fill="#002D3A"/>' },
+        { label: 'Ready-Made investing', icon: '<ellipse cx="30" cy="30" rx="22" ry="22" fill="#FCEEF0"/><path d="M18 36 Q28 18 40 28 Q44 33 37 38 Q29 43 20 38Z" fill="#E31D2B"/><path d="M35 25 Q42 16 46 21 Q44 29 37 28Z" fill="#002D3A"/>' },
+        { label: 'Self-Invested Personal Pension', icon: '<ellipse cx="30" cy="30" rx="22" ry="22" fill="#FCEEF0"/><path d="M20 35 Q28 20 38 28 Q42 32 36 36 Q30 40 22 37Z" fill="#E31D2B"/><path d="M34 26 Q40 18 44 22 Q42 28 36 28Z" fill="#002D3A"/>' },
+        { label: 'Financial advice', icon: '<ellipse cx="30" cy="30" rx="22" ry="22" fill="#FCEEF0"/><path d="M20 35 Q28 20 38 28 Q42 32 36 36 Q30 40 22 37Z" fill="#E31D2B"/><path d="M34 26 Q40 18 44 22 Q42 28 36 28Z" fill="#002D3A"/>' }
+    ];
+
+    // Build the Infinite Track (Prepend clones + Originals + Append clones)
+    let carouselHTML = '';
+    const createItem = (p, index) => `
+        <div class="product-item" data-orig-index="${index}">
+            <div class="product-circle">
+                <svg class="sw-bird" viewBox="0 0 60 60" fill="none">${p.icon}</svg>
+            </div>
+            <span class="product-label">${p.label}</span>
+        </div>`;
+    
+    // Clone set 1 (Left padding for infinite scroll)
+    products.forEach((p, i) => { carouselHTML += createItem(p, i); });
+    // Original set 2 (Center)
+    products.forEach((p, i) => { carouselHTML += createItem(p, i); });
+    // Clone set 3 (Right padding for infinite scroll)
+    products.forEach((p, i) => { carouselHTML += createItem(p, i); });
+    
+    carousel.innerHTML = carouselHTML;
+    const items = document.querySelectorAll('.product-item');
+
+    // Math for the seamless loop
+    let isHandlingJump = false;
+    
+    const updateCenterActiveItem = () => {
+        const carouselCenter = carousel.getBoundingClientRect().left + (carousel.offsetWidth / 2);
+        let minDistance = Infinity;
+        let activeElement = null;
+
+        items.forEach((item) => {
+            const itemCenter = item.getBoundingClientRect().left + (item.offsetWidth / 2);
+            const distance = Math.abs(carouselCenter - itemCenter);
+            if (distance < minDistance) {
+                minDistance = distance;
+                activeElement = item;
+            }
+        });
+
+        items.forEach(item => item.classList.remove('active'));
+        if (activeElement) {
+            activeElement.classList.add('active');
+            // Sync dots based on original index
+            const origIndex = parseInt(activeElement.getAttribute('data-orig-index'));
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === origIndex));
+        }
+    };
+
+    // Listen to scroll to update active state & handle infinite jumps
+    carousel.addEventListener('scroll', () => {
+        window.requestAnimationFrame(() => {
+            updateCenterActiveItem();
+
+            if (isHandlingJump || items.length === 0) return;
+
+            // Calculate widths
+            const itemWidth = items[1].offsetLeft - items[0].offsetLeft;
+            const setWidth = itemWidth * 5; // Width of 5 original items
+
+            // If we scrolled backwards into the first clone set
+            if (carousel.scrollLeft < itemWidth) {
+                isHandlingJump = true;
+                // Temporarily disable snap to prevent jerky animation
+                carousel.style.scrollSnapType = 'none';
+                carousel.scrollLeft += setWidth;
+                
+                // Force reflow and re-enable snap
+                setTimeout(() => {
+                    carousel.style.scrollSnapType = 'x mandatory';
+                    isHandlingJump = false;
+                }, 50);
+            } 
+            // If we scrolled forwards into the last clone set
+            else if (carousel.scrollLeft > (setWidth * 2) - itemWidth) {
+                isHandlingJump = true;
+                carousel.style.scrollSnapType = 'none';
+                carousel.scrollLeft -= setWidth;
+                
+                setTimeout(() => {
+                    carousel.style.scrollSnapType = 'x mandatory';
+                    isHandlingJump = false;
+                }, 50);
+            }
+        });
+    });
+
+    // Arrow controls
+    document.getElementById('btnRight').onclick = () => {
+        const itemWidth = items[1].offsetLeft - items[0].offsetLeft;
+        carousel.scrollBy({ left: itemWidth, behavior: 'smooth' });
+    };
+    document.getElementById('btnLeft').onclick = () => {
+        const itemWidth = items[1].offsetLeft - items[0].offsetLeft;
+        carousel.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+    };
+
+    // Click to center specific items
+    items.forEach(item => {
+        item.addEventListener('click', () => {
+            const itemCenter = item.offsetLeft + (item.offsetWidth / 2);
+            const carouselCenter = carousel.offsetWidth / 2;
+            carousel.scrollTo({ left: itemCenter - carouselCenter, behavior: 'smooth' });
+        });
+    });
+
+    // Initialize position to the middle (Original) set
+    setTimeout(() => {
+        const itemWidth = items[1].offsetLeft - items[0].offsetLeft;
+        const setWidth = itemWidth * 5;
+        // Scroll to the exact middle of the second set
+        carousel.scrollTo({ left: setWidth + (itemWidth * 2), behavior: 'auto' });
+        updateCenterActiveItem();
+    }, 100);
+
+    // ── Filter buttons ──
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // ── Down arrow smooth scroll ──
+    document.querySelector('.down-arrow-btn').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
+</body>
+</html>
