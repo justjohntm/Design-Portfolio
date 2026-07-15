@@ -3,7 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>John Campbell | UX/UI &amp; Digital Product Designer based in Glasgow, Scotland</title>
+<title>John Campbell — UX/UI &amp; Product Designer, Glasgow</title>
+<meta name="description" content="John Campbell is a UX/UI and product designer in Glasgow with a decade of experience across financial services, retail and e-commerce design systems.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "John Campbell",
+  "jobTitle": "UX/UI & Digital Product Designer",
+  "url": "https://johnjcampbell.co.uk",
+  "image": "https://johnjcampbell.co.uk/images/about/me.jpeg",
+  "sameAs": ["https://www.linkedin.com/in/johnjamescampbell/"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Glasgow",
+    "addressCountry": "GB"
+  },
+  "knowsAbout": [
+    "UX Design", "UI Design", "Design Systems", "Design Tokens",
+    "Product Design", "Accessibility", "Neuroaesthetic Design",
+    "E-commerce UX", "Financial Services UX"
+  ],
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Glasgow Caledonian University"
+  }
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/open-props">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -24,7 +52,7 @@
 <div class="hero">
   <div class="wrap">
     <h1>Hiya I'm ⬆️</h1>
-    <p>Multidisciplinary designer creating beautiful and impactful experiences through empathy-led design. ✨</p>
+    <p>UX/UI designer with a decade building scalable design systems across financial services, retail and e-commerce. Based in Glasgow.</p>
   </div>
 </div>
 
@@ -64,6 +92,7 @@
     </a>
   </div>
 
+  <p style="font-weight:500; text-align: center; margin: 2rem 0;">Open to contract UX/UI work and design system builds — <a href="mailto:jjcjabell@gmail.com">email me</a> or find me on <a href="https://www.linkedin.com/in/johnjamescampbell/">LinkedIn</a>.</p>
   <footer class="contact">
     <p>Get in touch with me via one of the links here.</p>
     <div class="links">
@@ -72,6 +101,14 @@
     </div>
   </footer>
 </div>
+
+<script>
+document.querySelectorAll('img').forEach(img => {
+  new IntersectionObserver(([e]) => e.isIntersecting && e.target.classList.add('in-view'),
+    { threshold: 0.2 }
+  ).observe(img);
+});
+</script>
 
 </body>
 </html>
